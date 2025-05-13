@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "prideflagmod",
+	"version": "${version}",
+	"name": "Pride Flags",
+	"description": "Adds Pride Flags to Minecraft.",
+	"authors": [
+		"Hyrul",
+		"Freya"
+	],
+	"contact": {
+		"homepage": "https://github.com/Hyrull",
+		"sources": "https://github.com/Hyrull/fabric-PrideFlagsMod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/prideflagmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.hyrul.prideflagmod.PrideFlags"
+		],
+		"fabric-datagen": [
+			"com.hyrul.prideflagmod.PrideFlagsDataGenerator"
+		],
+		"client": [
+			"com.hyrul.prideflagmod.PrideFlagsModClient"
+		]
+	},
+	"mixins": [
+		"prideflagmod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
