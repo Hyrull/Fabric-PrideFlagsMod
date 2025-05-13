@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north":  { "model": "prideflagmod:block/flag_genderfluid" },
+    "facing=south":  { "model": "prideflagmod:block/flag_genderfluid", "y": 180 },
+    "facing=west":   { "model": "prideflagmod:block/flag_genderfluid", "y": 270 },
+    "facing=east":   { "model": "prideflagmod:block/flag_genderfluid", "y": 90 }
+  }
+}

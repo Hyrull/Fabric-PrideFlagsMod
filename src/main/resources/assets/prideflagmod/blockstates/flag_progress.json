@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north":  { "model": "prideflagmod:block/flag_progress" },
+    "facing=south":  { "model": "prideflagmod:block/flag_progress", "y": 180 },
+    "facing=west":   { "model": "prideflagmod:block/flag_progress", "y": 270 },
+    "facing=east":   { "model": "prideflagmod:block/flag_progress", "y": 90 }
+  }
+}

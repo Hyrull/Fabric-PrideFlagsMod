@@ -1,5 +1,6 @@
 package com.hyrul.prideflagmod;
 
+import com.hyrul.prideflagmod.block.ModBlocks;
 import com.hyrul.prideflagmod.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -13,5 +14,6 @@ public class PrideFlags implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
 	}
 }
