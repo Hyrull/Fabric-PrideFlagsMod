@@ -6,7 +6,6 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.MossBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -62,7 +61,7 @@ public class PrideFlags implements ModInitializer {
 		};
 
 		for (Item pattern : pridePatterns) {
-			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 1, factories -> {
+			TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 1, factories -> {
 				factories.add(((entity, random) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 1),
 						new ItemStack(pattern, 1), 10, 2, 0f)
@@ -72,7 +71,7 @@ public class PrideFlags implements ModInitializer {
 			TradeOfferHelper.registerWanderingTraderOffers(1, factories -> {
 				factories.add(((entity, random) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 1),
-						new ItemStack(pattern, 1), 10, 3, 0f)
+						new ItemStack(pattern, 1), 5, 3, 0f)
 				));
 			});
 		}
@@ -81,14 +80,14 @@ public class PrideFlags implements ModInitializer {
 			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 2, factories -> {
 				factories.add(((entity, random) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 2),
-						new ItemStack(flag, 1), 10, 4, 0f)
+						new ItemStack(flag, 1), 10, 2, 0f)
 				));
 			});
 
 			TradeOfferHelper.registerWanderingTraderOffers(2, factories -> {
 				factories.add(((entity, random) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 2),
-						new ItemStack(flag, 1), 10, 6, 0f)
+						new ItemStack(flag, 1), 5, 3, 0f)
 				));
 			});
 		}
