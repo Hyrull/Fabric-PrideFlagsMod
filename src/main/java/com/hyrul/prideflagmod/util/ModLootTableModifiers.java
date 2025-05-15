@@ -2,7 +2,7 @@ package com.hyrul.prideflagmod.util;
 
 import com.hyrul.prideflagmod.block.ModBlocks;
 import com.hyrul.prideflagmod.item.ModItems;
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.loot.LootPool;
@@ -73,7 +73,7 @@ public class ModLootTableModifiers {
                 LootTables.VILLAGE_SAVANNA_HOUSE_CHEST
         };
 
-        LootTableEvents.MODIFY.register((key, tableBuilder, source) -> {
+        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             for (RegistryKey<LootTable> lootTable : commonLootTables) {
                 if (key.equals(lootTable)) {
                     // to turn into a switch case if % gets more specific than this eventually
