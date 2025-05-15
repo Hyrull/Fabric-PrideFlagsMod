@@ -2,6 +2,7 @@ package com.hyrul.prideflagmod;
 
 import com.hyrul.prideflagmod.block.ModBlocks;
 import com.hyrul.prideflagmod.item.ModItems;
+import com.hyrul.prideflagmod.util.ModLootTableModifiers;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
@@ -24,6 +25,9 @@ public class PrideFlags implements ModInitializer {
 		// registering new blocks & items
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
+		// adding content to the world chests
+		ModLootTableModifiers.modifyLootTables();
 
 
 		// Adding the patterns & flags to the merchant & wandering merchant trades list
@@ -60,6 +64,7 @@ public class PrideFlags implements ModInitializer {
 				ModBlocks.FLAG_GENDERFLUID
 		};
 
+		// items (patterns)
 		for (Item pattern : pridePatterns) {
 			TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 1, factories -> {
 				factories.add(((entity, random) -> new TradeOffer(
@@ -76,6 +81,8 @@ public class PrideFlags implements ModInitializer {
 			});
 		}
 
+
+		// blocks (flags)
 		for (Block flag : prideFlags) {
 			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 2, factories -> {
 				factories.add(((entity, random) -> new TradeOffer(
