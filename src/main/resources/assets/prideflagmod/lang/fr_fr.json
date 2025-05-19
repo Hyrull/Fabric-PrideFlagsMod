@@ -25,5 +25,10 @@
   "block.prideflagmod.flag_nonbinary": "Drapeau de Non-Binarité",
   "block.prideflagmod.flag_asexual": "Drapeau Ace",
   "block.prideflagmod.flag_aromantic": "Drapeau Aromantique",
-  "block.prideflagmod.flag_genderfluid": "Drapeau Genderfluide"
+  "block.prideflagmod.flag_genderfluid": "Drapeau Genderfluide",
+
+  "advancement.prideflagmod.got_pattern.title": "Mon premier motif !",
+  "advancement.prideflagmod.got_pattern.description": "Plus qu'à en faire un drapeau !",
+  "advancement.prideflagmod.got_flag.title": "Mon premier drapeau !",
+  "advancement.prideflagmod.got_flag.description": "À exposer fièrement !"
 }

@@ -1,5 +1,6 @@
 package com.hyrul.prideflagmod;
 
+import com.hyrul.prideflagmod.datagen.ModAdvancementProvider;
 import com.hyrul.prideflagmod.datagen.ModLootTableProvider;
 import com.hyrul.prideflagmod.datagen.ModModelProvider;
 import com.hyrul.prideflagmod.datagen.ModRecipeProvider;
@@ -15,5 +16,6 @@ public class PrideFlagsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModLootTableProvider::new);
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
+		pack.addProvider(ModAdvancementProvider::new);
 	}
 }

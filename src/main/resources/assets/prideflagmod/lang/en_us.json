@@ -25,5 +25,10 @@
   "block.prideflagmod.flag_nonbinary": "Non-binary Flag",
   "block.prideflagmod.flag_asexual": "Asexual Flag",
   "block.prideflagmod.flag_aromantic": "Aromantic Flag",
-  "block.prideflagmod.flag_genderfluid": "Genderfluid Flag"
+  "block.prideflagmod.flag_genderfluid": "Genderfluid Flag",
+
+  "advancement.prideflagmod.got_pattern.title": "My first pattern!",
+  "advancement.prideflagmod.got_pattern.description": "Now we can make a flag out of it!",
+  "advancement.prideflagmod.got_flag.title": "My first flag!",
+  "advancement.prideflagmod.got_flag.description": "Display it proudly!"
 }
