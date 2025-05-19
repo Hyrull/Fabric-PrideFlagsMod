@@ -58,6 +58,12 @@ processResources {
 	}
 }
 
+tasks.withType(Jar).configureEach {
+	if (name == "sourcesJar") {
+		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	}
+}
+
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 21
 }
