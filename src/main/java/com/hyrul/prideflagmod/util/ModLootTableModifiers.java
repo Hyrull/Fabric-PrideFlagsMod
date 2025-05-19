@@ -15,6 +15,8 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.loot.LootTable;
 import net.minecraft.registry.RegistryKey;
 
+import java.util.List;
+
 public class ModLootTableModifiers {
     public static void modifyLootTables() {
 
@@ -51,7 +53,7 @@ public class ModLootTableModifiers {
         };
 
         // This array defines what chest it all gets added to. % are defined lower on
-        RegistryKey<LootTable>[] commonLootTables = new RegistryKey[] {
+        List<RegistryKey<LootTable>> commonLootTables = List.of(
                 LootTables.PILLAGER_OUTPOST_CHEST,
                 LootTables.WOODLAND_MANSION_CHEST,
                 LootTables.SHIPWRECK_TREASURE_CHEST,
@@ -71,7 +73,7 @@ public class ModLootTableModifiers {
                 LootTables.VILLAGE_TAIGA_HOUSE_CHEST,
                 LootTables.VILLAGE_SNOWY_HOUSE_CHEST,
                 LootTables.VILLAGE_SAVANNA_HOUSE_CHEST
-        };
+        );
 
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             for (RegistryKey<LootTable> lootTable : commonLootTables) {

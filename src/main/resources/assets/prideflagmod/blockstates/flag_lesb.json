@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north":  { "model": "prideflagmod:block/flag_lesb" },
-    "facing=south":  { "model": "prideflagmod:block/flag_lesb", "y": 180 },
-    "facing=west":   { "model": "prideflagmod:block/flag_lesb", "y": 270 },
-    "facing=east":   { "model": "prideflagmod:block/flag_lesb", "y": 90 }
-  }
-}

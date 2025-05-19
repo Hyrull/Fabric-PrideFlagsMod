@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north":  { "model": "prideflagmod:block/flag_pansexual" },
-    "facing=south":  { "model": "prideflagmod:block/flag_pansexual", "y": 180 },
-    "facing=west":   { "model": "prideflagmod:block/flag_pansexual", "y": 270 },
-    "facing=east":   { "model": "prideflagmod:block/flag_pansexual", "y": 90 }
-  }
-}

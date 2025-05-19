@@ -24,6 +24,20 @@ fabricApi {
 	}
 }
 
+loom {
+	runs {
+		datagen {
+			client()
+			name = "Data Generation"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=${project.projectDir}/src/generated/resources"
+			vmArg "-Dfabric-api.datagen.modid=prideflagmod"
+
+			runDir = "build/datagen"
+		}
+	}
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -32,11 +46,12 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+
 }
 
 processResources {
 	inputs.property "version", project.version
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
 	filesMatching("fabric.mod.json") {
 		expand "version": inputs.properties.version

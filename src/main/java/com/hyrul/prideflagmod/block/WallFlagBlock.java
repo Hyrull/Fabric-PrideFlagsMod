@@ -58,17 +58,12 @@ public class WallFlagBlock extends Block implements Waterloggable {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction dir = state.get(FACING);
-        switch (dir) {
-            case NORTH:
-                return VoxelShapes.cuboid(0, 0, 15 / 16f, 1, 1, 1);
-            case SOUTH:
-                return VoxelShapes.cuboid(0, 0, 0, 1, 1, 1 / 16f);
-            case WEST:
-                return VoxelShapes.cuboid(15 / 16f, 0, 0, 1, 1, 1);
-            case EAST:
-                return VoxelShapes.cuboid(0, 0, 0, 1 / 16f, 1, 1);
-            default:
-                return VoxelShapes.cuboid(0, 0, 15 / 16f, 1, 1, 1); // fallback
-        }
+        return switch (dir) {
+            case NORTH -> VoxelShapes.cuboid(0, -1f / 16f, 15 / 16f, 1, 1, 1);
+            case SOUTH -> VoxelShapes.cuboid(0, -1f / 16f, 0, 1, 1, 1 / 16f);
+            case WEST -> VoxelShapes.cuboid(15 / 16f, -1f / 16f, 0, 1, 1, 1);
+            case EAST -> VoxelShapes.cuboid(0, -1f / 16f, 0, 1 / 16f, 1, 1);
+            default -> VoxelShapes.cuboid(0, -1f / 16f, 15 / 16f, 1, 1, 1); // fallback
+        };
     }
 }
