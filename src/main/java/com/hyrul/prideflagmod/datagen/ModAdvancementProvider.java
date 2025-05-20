@@ -81,7 +81,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry getFlag = Advancement.Builder.create()
                 .parent(getPattern)
                 .display(
-                        ModBlocks.FLAG_PRIDE, // The display icon
+                        ModBlocks.FLAG_PROGRESS, // The display icon
                         Text.translatable("advancement.prideflagmod.got_flag.title"), // The title
                         Text.translatable("advancement.prideflagmod.got_flag.description"), // The description
                         Identifier.ofVanilla("textures/gui/advancements/backgrounds/adventure.png"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
