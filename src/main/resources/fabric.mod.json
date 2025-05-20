@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "prideflagmod",
 	"version": "${version}",
-	"name": "Pride Flags",
-	"description": "Adds Pride Flags to Minecraft!",
+	"name": "Pride Update",
+	"description": "mod.prideflagmod.description",
 	"authors": [
 		"Hyrul",
 		"Freya"

@@ -30,5 +30,7 @@
   "advancement.prideflagmod.got_pattern.title": "My first pattern!",
   "advancement.prideflagmod.got_pattern.description": "Coloring enthusiast",
   "advancement.prideflagmod.got_flag.title": "My first flag!",
-  "advancement.prideflagmod.got_flag.description": "Wave your flags!"
+  "advancement.prideflagmod.got_flag.description": "Wave your flags!",
+
+  "mod.prideflagmod.description": "Ajoute une palette d’objets thématiques à la communauté LGBTI+"
 }
