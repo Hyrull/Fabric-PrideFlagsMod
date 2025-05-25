@@ -220,6 +220,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input(Items.PURPLE_DYE);
         addUnlockCriteriaForItems(bisexualBuilder, Items.PAPER, Items.PINK_DYE, Items.PURPLE_DYE, Items.BLUE_DYE);
         bisexualBuilder.offerTo(recipeExporter);
+
+        // ----------- END OF PATTERNS --------------
+        // Trans Shield
+//        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SHIELD_TRANS)
+//                .pattern("WIW")
+//                .pattern("WPW")
+//                .pattern(" W ")
+//                .input('P', ModItems.PATTERN_TRANS)
+//                .input('I', Items.IRON_INGOT)
+//                .input('W', Items.OAK_PLANKS)
+//                .criterion("has_" + ModItems.PATTERN_TRANS.asItem().getName().getString(), conditionsFromItem(ModItems.PATTERN_TRANS))
+//                .offerTo(recipeExporter);
     }
 
     // method to automate the .criterion to D.R.Y.

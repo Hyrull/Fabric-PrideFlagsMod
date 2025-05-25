@@ -23,6 +23,11 @@ public class ModItems {
     public static final Item PATTERN_AROMANTIC = registerItem("pattern_aromantic", new Item(new Item.Settings()));
     public static final Item PATTERN_GENDERFLUID = registerItem("pattern_genderfluid", new Item(new Item.Settings()));
 
+/*
+    public static final Item SHIELD_TRANS = registerItem("shield_trans",
+            new ModShieldItem(new Item.Settings().maxDamage(336).maxCount(1)));
+*/
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(PrideFlags.MOD_ID, name), item);
@@ -46,5 +51,9 @@ public class ModItems {
             entries.add(PATTERN_AROMANTIC);
             entries.add(PATTERN_GENDERFLUID);
         });
+
+//        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
+//            entries.add(SHIELD_TRANS);
+//        });
     }
 }
