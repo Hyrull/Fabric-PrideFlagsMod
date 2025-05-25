@@ -31,7 +31,7 @@ public class ModBlocks {
 
     private static AbstractBlock.Settings createWallFlagSettings() {
         return AbstractBlock.Settings.create()
-                .strength(0.5f, 1200f)
+                .strength(0.5f, 0.8f)
                 .nonOpaque()
                 .sounds(BlockSoundGroup.WOOL);
     }
@@ -65,5 +65,4 @@ public class ModBlocks {
             entries.add(ModBlocks.FLAG_GENDERFLUID);
         });
     }
-
 }
