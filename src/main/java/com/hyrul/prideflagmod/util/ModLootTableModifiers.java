@@ -79,8 +79,8 @@ public class ModLootTableModifiers {
             for (RegistryKey<LootTable> lootTable : commonLootTables) {
                 if (key.equals(lootTable)) {
                     // to turn into a switch case if % gets more specific than this eventually
-                    float patternChance = (lootTable == LootTables.PILLAGER_OUTPOST_CHEST || lootTable == LootTables.WOODLAND_MANSION_CHEST) ? 0.01f : 0.02f;
-                    float flagChance = (lootTable == LootTables.VILLAGE_SHEPARD_CHEST) ? 0.10f : patternChance; // flag % is always the same as the pattern chance except for the shepard, so
+                    float patternChance = (lootTable == LootTables.PILLAGER_OUTPOST_CHEST || lootTable == LootTables.WOODLAND_MANSION_CHEST) ? 0.005f : 0.01f;
+                    float flagChance = (lootTable == LootTables.VILLAGE_SHEPARD_CHEST) ? 0.05f : patternChance; // flag % is always the same as the pattern chance except for the shepard, so
 
                     // adding everything
                     for (Item pattern : pridePatterns) {
