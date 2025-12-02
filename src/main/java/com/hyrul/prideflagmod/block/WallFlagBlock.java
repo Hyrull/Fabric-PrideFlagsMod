@@ -8,7 +8,8 @@ import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+
+import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -19,8 +20,8 @@ import net.minecraft.world.World;
 import net.minecraft.item.ItemPlacementContext;
 
 public class WallFlagBlock extends Block implements Waterloggable {
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-    public static final BooleanProperty WATERLOGGED = net.minecraft.state.property.Properties.WATERLOGGED;
+    public static final net.minecraft.state.property.Property<Direction> FACING = Properties.HORIZONTAL_FACING;
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public WallFlagBlock(Settings settings) {
         super(settings);
