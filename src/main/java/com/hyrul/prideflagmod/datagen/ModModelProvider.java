@@ -2,12 +2,12 @@ package com.hyrul.prideflagmod.datagen;
 
 import com.hyrul.prideflagmod.block.ModBlocks;
 import com.hyrul.prideflagmod.item.ModItems;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.Models;
 import net.minecraft.item.Item;
 
 public class ModModelProvider extends FabricModelProvider {
@@ -52,14 +52,18 @@ public class ModModelProvider extends FabricModelProvider {
         for (Block flag : prideFlags) {
             blockStateModelGenerator.registerNorthDefaultHorizontalRotation(flag);
         }
-
-
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        // Patterns
         for (Item pattern : pridePatterns) {
             itemModelGenerator.register(pattern, Models.GENERATED);
+        }
+
+        // Block items (flags) - if they need custom item textures
+        for (Block flag : prideFlags) {
+            itemModelGenerator.register(flag.asItem(), Models.GENERATED);
         }
     }
 }
