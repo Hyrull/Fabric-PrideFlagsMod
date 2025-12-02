@@ -50,7 +50,7 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         for (Block flag : prideFlags) {
-            blockStateModelGenerator.registerNorthDefaultHorizontalRotation(flag);
+            blockStateModelGenerator.registerNorthDefaultHorizontalRotatable(flag);
         }
     }
 
