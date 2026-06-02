@@ -73,14 +73,14 @@ public class PrideFlags implements ModInitializer {
 			String offerKey = id.getPath(); // "bi_flag"
 
 			TradeOfferHelper.registerVillagerOffers(VillagerProfession.LIBRARIAN, 1, factories -> {
-				factories.add(((entity, random) -> new TradeOffer(
+				factories.add(((entity, random, __) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 1),
 						new ItemStack(pattern, 1), 10, 2, 0f)
 				));
 			});
 
 			TradeOfferHelper.registerWanderingTraderOffers(factories -> {
-				factories.addAll(Identifier.of(PrideFlags.MOD_ID, offerKey), ((entity, random) -> new TradeOffer(
+				factories.addAll(Identifier.of(PrideFlags.MOD_ID, offerKey), ((entity, random, __) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 1),
 						new ItemStack(pattern, 1), 5, 3, 0f)
 				));
@@ -94,14 +94,14 @@ public class PrideFlags implements ModInitializer {
 			String offerKey = id.getPath();
 
 			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 2, factories -> {
-				factories.add(((entity, random) -> new TradeOffer(
+				factories.add(((entity, random, __) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 2),
 						new ItemStack(flag, 1), 10, 2, 0f)
 				));
 			});
 
 			TradeOfferHelper.registerWanderingTraderOffers(factories -> {
-				factories.addAll(Identifier.of(PrideFlags.MOD_ID, offerKey), ((entity, random) -> new TradeOffer(
+				factories.addAll(Identifier.of(PrideFlags.MOD_ID, offerKey), ((entity, random, __) -> new TradeOffer(
 						new TradedItem(Items.EMERALD, 2),
 						new ItemStack(flag, 1), 5, 3, 0f)
 				));
