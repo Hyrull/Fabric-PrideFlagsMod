@@ -1,14 +1,14 @@
 package com.hyrul.prideflagmod.item;
 
 import com.hyrul.prideflagmod.PrideFlags;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 
 import java.util.function.Function;
 
@@ -29,35 +29,36 @@ public class ModItems {
 
 /*
     public static final Item SHIELD_TRANS = registerItem("shield_trans",
-            setting -> new ModShieldItem(setting.maxDamage(336).maxCount(1)));
+            properties -> new ModShieldItem(properties.durability(336).stacksTo(1)));
 */
 
-    private static Item registerItem(String name, Function<Item.Settings, Item> function) {
-        return Registry.register(Registries.ITEM, Identifier.of(PrideFlags.MOD_ID, name),
-                function.apply(new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(PrideFlags.MOD_ID, name)))));
+    private static Item registerItem(String name, Function<Item.Properties, Item> function) {
+        Identifier id = Identifier.fromNamespaceAndPath(PrideFlags.MOD_ID, name);
+        ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, id);
+        return Registry.register(BuiltInRegistries.ITEM, id, function.apply(new Item.Properties().setId(key)));
     }
 
     public static void registerModItems() {
         PrideFlags.LOGGER.info("Registering items for " + PrideFlags.MOD_ID);
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.add(PATTERN_BI);
-            entries.add(PATTERN_GAY);
-            entries.add(PATTERN_INTER);
-            entries.add(PATTERN_LESB);
-            entries.add(PATTERN_TRANS);
-            entries.add(PATTERN_PRIDE);
-            entries.add(PATTERN_PROGRESS);
-            entries.add(PATTERN_POLYAMORY);
-            entries.add(PATTERN_PANSEXUAL);
-            entries.add(PATTERN_NONBINARY);
-            entries.add(PATTERN_ASEXUAL);
-            entries.add(PATTERN_AROMANTIC);
-            entries.add(PATTERN_GENDERFLUID);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> {
+            output.accept(PATTERN_BI);
+            output.accept(PATTERN_GAY);
+            output.accept(PATTERN_INTER);
+            output.accept(PATTERN_LESB);
+            output.accept(PATTERN_TRANS);
+            output.accept(PATTERN_PRIDE);
+            output.accept(PATTERN_PROGRESS);
+            output.accept(PATTERN_POLYAMORY);
+            output.accept(PATTERN_PANSEXUAL);
+            output.accept(PATTERN_NONBINARY);
+            output.accept(PATTERN_ASEXUAL);
+            output.accept(PATTERN_AROMANTIC);
+            output.accept(PATTERN_GENDERFLUID);
         });
 
-//        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
-//            entries.add(SHIELD_TRANS);
+//        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
+//            output.accept(SHIELD_TRANS);
 //        });
     }
 }

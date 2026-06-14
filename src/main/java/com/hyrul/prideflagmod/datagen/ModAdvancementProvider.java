@@ -3,127 +3,85 @@ package com.hyrul.prideflagmod.datagen;
 import com.hyrul.prideflagmod.PrideFlags;
 import com.hyrul.prideflagmod.block.ModBlocks;
 import com.hyrul.prideflagmod.item.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementEntry;
-import net.minecraft.advancement.AdvancementFrame;
-import net.minecraft.advancement.criterion.InventoryChangedCriterion;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.advancement.AdvancementRequirements;
-
-import java.util.List;
-import java.util.Arrays;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class ModAdvancementProvider extends FabricAdvancementProvider {
-    public ModAdvancementProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public ModAdvancementProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
     @Override
-    public void generateAdvancement(RegistryWrapper.WrapperLookup wrapperLookup, Consumer<AdvancementEntry> consumer) {
+    public void generateAdvancement(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver) {
 
         // Advancement 1 : upon getting any pattern
-
-        AdvancementEntry getPattern = Advancement.Builder.create()
-                .parent(Identifier.of("husbandry/root")) // Marked for removal, but official docs still use it and didn't give any alternative yet
+        AdvancementHolder getPattern = Advancement.Builder.advancement()
+                .parent(Identifier.withDefaultNamespace("husbandry/root"))
                 .display(
                         ModItems.PATTERN_PROGRESS, // The display icon
-                        Text.translatable("advancement.prideflagmod.got_pattern.title"), // The title
-                        Text.translatable("advancement.prideflagmod.got_pattern.description"), // The description
-                        Identifier.ofVanilla("textures/gui/advancements/backgrounds/adventure.png"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
-                        AdvancementFrame.TASK, // TASK, CHALLENGE, or GOAL
+                        Component.translatable("advancement.prideflagmod.got_pattern.title"), // The title
+                        Component.translatable("advancement.prideflagmod.got_pattern.description"), // The description
+                        Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png"), // Background image
+                        AdvancementType.TASK, // TASK, CHALLENGE, or GOAL
                         true, // Show the toast when completing it?
                         true, // Announce it to chat?
                         false // Hidden?
                 )
-                .criterion("has_pride", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_PRIDE))
-                .criterion("has_trans", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_TRANS))
-                .criterion("has_gay", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_GAY))
-                .criterion("has_bi", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_BI))
-                .criterion("has_lesb", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_LESB))
-                .criterion("has_progress", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_PROGRESS))
-                .criterion("has_inter", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_INTER))
-                .criterion("has_polyamory", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_POLYAMORY))
-                .criterion("has_pansexual", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_PANSEXUAL))
-                .criterion("has_nonbinary", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_NONBINARY))
-                .criterion("has_asexual", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_ASEXUAL))
-                .criterion("has_aromantic", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_AROMANTIC))
-                .criterion("has_genderfluid", InventoryChangedCriterion.Conditions.items(ModItems.PATTERN_GENDERFLUID))
-                .requirements(new AdvancementRequirements(
-                        List.of(
-                                Arrays.asList(
-                                        "has_pride",
-                                        "has_trans",
-                                        "has_gay",
-                                        "has_bi",
-                                        "has_lesb",
-                                        "has_progress",
-                                        "has_inter",
-                                        "has_polyamory",
-                                        "has_pansexual",
-                                        "has_nonbinary",
-                                        "has_asexual",
-                                        "has_aromantic",
-                                        "has_genderfluid"
-                                )
-                        )
-                ))
-
-                .build(consumer, PrideFlags.MOD_ID + "/got_pattern");
-
+                .addCriterion("has_pride", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_PRIDE))
+                .addCriterion("has_trans", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_TRANS))
+                .addCriterion("has_gay", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_GAY))
+                .addCriterion("has_bi", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_BI))
+                .addCriterion("has_lesb", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_LESB))
+                .addCriterion("has_progress", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_PROGRESS))
+                .addCriterion("has_inter", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_INTER))
+                .addCriterion("has_polyamory", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_POLYAMORY))
+                .addCriterion("has_pansexual", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_PANSEXUAL))
+                .addCriterion("has_nonbinary", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_NONBINARY))
+                .addCriterion("has_asexual", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_ASEXUAL))
+                .addCriterion("has_aromantic", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_AROMANTIC))
+                .addCriterion("has_genderfluid", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PATTERN_GENDERFLUID))
+                .requirements(AdvancementRequirements.Strategy.OR)
+                .save(saver, Identifier.fromNamespaceAndPath(PrideFlags.MOD_ID, "got_pattern"));
 
         // Advancement 2 - Get any flag
-        AdvancementEntry getFlag = Advancement.Builder.create()
+        AdvancementHolder getFlag = Advancement.Builder.advancement()
                 .parent(getPattern)
                 .display(
                         ModBlocks.FLAG_PROGRESS, // The display icon
-                        Text.translatable("advancement.prideflagmod.got_flag.title"), // The title
-                        Text.translatable("advancement.prideflagmod.got_flag.description"), // The description
-                        Identifier.ofVanilla("textures/gui/advancements/backgrounds/adventure.png"), // Background image for the tab in the advancements page, if this is a root advancement (has no parent)
-                        AdvancementFrame.TASK, // TASK, CHALLENGE, or GOAL
+                        Component.translatable("advancement.prideflagmod.got_flag.title"), // The title
+                        Component.translatable("advancement.prideflagmod.got_flag.description"), // The description
+                        Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png"), // Background image
+                        AdvancementType.TASK, // TASK, CHALLENGE, or GOAL
                         true, // Show the toast when completing it?
                         true, // Announce it to chat?
                         false // Hidden?
                 )
-                // "got_dirt" is the name referenced by other advancements when they want to have "requirements."
-                .criterion("has_pride_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_PRIDE))
-                .criterion("has_trans_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_TRANS))
-                .criterion("has_gay_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_GAY))
-                .criterion("has_bi_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_BI))
-                .criterion("has_lesb_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_LESB))
-                .criterion("has_progress_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_PROGRESS))
-                .criterion("has_inter_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_INTER))
-                .criterion("has_polyamory_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_POLYAMORY))
-                .criterion("has_pansexual_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_PANSEXUAL))
-                .criterion("has_nonbinary_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_NONBINARY))
-                .criterion("has_asexual_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_ASEXUAL))
-                .criterion("has_aromantic_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_AROMANTIC))
-                .criterion("has_genderfluid_flag", InventoryChangedCriterion.Conditions.items(ModBlocks.FLAG_GENDERFLUID))
-                .requirements(new AdvancementRequirements(
-                        List.of(
-                                Arrays.asList(
-                                        "has_pride_flag",
-                                        "has_trans_flag",
-                                        "has_gay_flag",
-                                        "has_bi_flag",
-                                        "has_lesb_flag",
-                                        "has_progress_flag",
-                                        "has_inter_flag",
-                                        "has_polyamory_flag",
-                                        "has_pansexual_flag",
-                                        "has_nonbinary_flag",
-                                        "has_asexual_flag",
-                                        "has_aromantic_flag",
-                                        "has_genderfluid_flag"
-                                )
-                        )
-                ))
-
-                .build(consumer, PrideFlags.MOD_ID + "/got_flag");
+                .addCriterion("has_pride_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_PRIDE))
+                .addCriterion("has_trans_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_TRANS))
+                .addCriterion("has_gay_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_GAY))
+                .addCriterion("has_bi_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_BI))
+                .addCriterion("has_lesb_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_LESB))
+                .addCriterion("has_progress_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_PROGRESS))
+                .addCriterion("has_inter_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_INTER))
+                .addCriterion("has_polyamory_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_POLYAMORY))
+                .addCriterion("has_pansexual_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_PANSEXUAL))
+                .addCriterion("has_nonbinary_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_NONBINARY))
+                .addCriterion("has_asexual_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_ASEXUAL))
+                .addCriterion("has_aromantic_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_AROMANTIC))
+                .addCriterion("has_genderfluid_flag", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.FLAG_GENDERFLUID))
+                .requirements(AdvancementRequirements.Strategy.OR)
+                .save(saver, Identifier.fromNamespaceAndPath(PrideFlags.MOD_ID, "got_flag"));
     }
 }

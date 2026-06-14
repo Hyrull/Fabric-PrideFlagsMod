@@ -1,18 +1,18 @@
 package com.hyrul.prideflagmod.block;
 
 import com.hyrul.prideflagmod.PrideFlags;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class ModBlocks {
 
@@ -30,49 +30,55 @@ public class ModBlocks {
     public static final Block FLAG_AROMANTIC = registerBlock("flag_aromantic", WallFlagBlock::new);
     public static final Block FLAG_GENDERFLUID = registerBlock("flag_genderfluid", WallFlagBlock::new);
 
-    private static AbstractBlock.Settings createWallFlagSettings() {
-        return AbstractBlock.Settings.create()
-                .strength(0.5f, 0.8f)
-                .nonOpaque()
-                .sounds(BlockSoundGroup.WOOL);
+    private static BlockBehaviour.Properties createWallFlagSettings() {
+        return BlockBehaviour.Properties.of()
+                .destroyTime(0.5f)
+                .explosionResistance(0.8f)
+                .noOcclusion()
+                .sound(SoundType.WOOL);
     }
 
-    private static Block registerBlock(String name, java.util.function.Function<AbstractBlock.Settings, Block> factory) {
-        RegistryKey<Block> blockKey = RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(PrideFlags.MOD_ID, name));
-        AbstractBlock.Settings settings = AbstractBlock.Settings.create()
-                .registryKey(blockKey)
-                .strength(0.5f, 0.8f)
-                .nonOpaque()
-                .sounds(BlockSoundGroup.WOOL);
+    private static Block registerBlock(String name, java.util.function.Function<BlockBehaviour.Properties, Block> factory) {
+        Identifier id = Identifier.fromNamespaceAndPath(PrideFlags.MOD_ID, name);
+        ResourceKey<Block> blockKey = ResourceKey.create(Registries.BLOCK, id);
 
-        Block block = factory.apply(settings);
+        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
+                .setId(blockKey)
+                .destroyTime(0.5f)
+                .explosionResistance(0.8f)
+                .noOcclusion()
+                .sound(SoundType.WOOL);
+
+        Block block = factory.apply(properties);
         registerBlockItem(name, block);
-        return Registry.register(Registries.BLOCK, Identifier.of(PrideFlags.MOD_ID, name), block);
+        return Registry.register(BuiltInRegistries.BLOCK, id, block);
     }
 
     private static void registerBlockItem(String name, Block block) {
-        Registry.register(Registries.ITEM, Identifier.of(PrideFlags.MOD_ID, name),
-                new BlockItem(block, new Item.Settings().useBlockPrefixedTranslationKey()
-                        .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(PrideFlags.MOD_ID, name)))));
+        Identifier id = Identifier.fromNamespaceAndPath(PrideFlags.MOD_ID, name);
+        ResourceKey<Item> itemKey = ResourceKey.create(Registries.ITEM, id);
+
+        Registry.register(BuiltInRegistries.ITEM, id,
+                new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix().setId(itemKey)));
     }
 
     public static void registerModBlocks() {
         PrideFlags.LOGGER.info("Registering blocks for " + PrideFlags.MOD_ID);
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(entries -> {
-            entries.add(ModBlocks.FLAG_BI);
-            entries.add(ModBlocks.FLAG_TRANS);
-            entries.add(ModBlocks.FLAG_GAY);
-            entries.add(ModBlocks.FLAG_LESB);
-            entries.add(ModBlocks.FLAG_INTER);
-            entries.add(ModBlocks.FLAG_PRIDE);
-            entries.add(ModBlocks.FLAG_PROGRESS);
-            entries.add(ModBlocks.FLAG_POLYAMORY);
-            entries.add(ModBlocks.FLAG_PANSEXUAL);
-            entries.add(ModBlocks.FLAG_NONBINARY);
-            entries.add(ModBlocks.FLAG_ASEXUAL);
-            entries.add(ModBlocks.FLAG_AROMANTIC);
-            entries.add(ModBlocks.FLAG_GENDERFLUID);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COLORED_BLOCKS).register(output -> {
+            output.accept(ModBlocks.FLAG_BI);
+            output.accept(ModBlocks.FLAG_TRANS);
+            output.accept(ModBlocks.FLAG_GAY);
+            output.accept(ModBlocks.FLAG_LESB);
+            output.accept(ModBlocks.FLAG_INTER);
+            output.accept(ModBlocks.FLAG_PRIDE);
+            output.accept(ModBlocks.FLAG_PROGRESS);
+            output.accept(ModBlocks.FLAG_POLYAMORY);
+            output.accept(ModBlocks.FLAG_PANSEXUAL);
+            output.accept(ModBlocks.FLAG_NONBINARY);
+            output.accept(ModBlocks.FLAG_ASEXUAL);
+            output.accept(ModBlocks.FLAG_AROMANTIC);
+            output.accept(ModBlocks.FLAG_GENDERFLUID);
         });
     }
 }

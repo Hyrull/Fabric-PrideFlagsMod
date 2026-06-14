@@ -3,15 +3,16 @@ package com.hyrul.prideflagmod.datagen;
 import com.hyrul.prideflagmod.block.ModBlocks;
 import com.hyrul.prideflagmod.item.ModItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.block.Block;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.ItemModelGenerator;
-import net.minecraft.client.data.Models;
-import net.minecraft.item.Item;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class ModModelProvider extends FabricModelProvider {
-    public ModModelProvider(FabricDataOutput output) {
+    public ModModelProvider(FabricPackOutput output) {
         super(output);
     }
 
@@ -48,22 +49,22 @@ public class ModModelProvider extends FabricModelProvider {
     };
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+    public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         for (Block flag : prideFlags) {
-            blockStateModelGenerator.registerNorthDefaultHorizontalRotatable(flag);
+            blockStateModelGenerator.createHorizontallyRotatedBlock(flag, TexturedModel.CUBE);
         }
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+    public void generateItemModels(ItemModelGenerators itemModelGenerator) {
         // Patterns
         for (Item pattern : pridePatterns) {
-            itemModelGenerator.register(pattern, Models.GENERATED);
+            itemModelGenerator.generateFlatItem(pattern, ModelTemplates.FLAT_ITEM);
         }
 
         // Block items (flags) - if they need custom item textures
         for (Block flag : prideFlags) {
-            itemModelGenerator.register(flag.asItem(), Models.GENERATED);
+            itemModelGenerator.generateFlatItem(flag.asItem(), ModelTemplates.FLAT_ITEM);
         }
     }
 }
